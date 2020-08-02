@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from "react";
+import "./App.css";
+import Form from "./components/Form";
+import Header from "./components/Header";
+import GetData from "./components/GetData";
+
+export const CountryContext = createContext();
 
 function App() {
+  const [country, dispatch] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CountryContext.Provider value={{ country: country, setCountry: dispatch }}>
+      <div className="App">
+        <Header />
+        <Form />
+        {country !== "" ? <GetData /> : null}
+      </div>
+    </CountryContext.Provider>
   );
 }
 
